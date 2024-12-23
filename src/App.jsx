@@ -1,8 +1,7 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import SongCard from "./components/SongCard";
+import Navbar from "./components/Navbar";
 
 function App() {
   const data = [
@@ -54,16 +53,19 @@ function App() {
     });
   };
   return (
-    <div className="grid grid-cols-5">
-      {songData.map((item, index) => (
-        <SongCard
-          song={item}
-          index={index}
-          handleAddFavourite={handleAddFavourite}
-          key={index}
-        />
-      ))}
-    </div>
+    <>
+      <Navbar songData={songData} />
+      <div className="grid grid-cols-5 mt-10">
+        {songData.map((item, index) => (
+          <SongCard
+            song={item}
+            index={index}
+            handleAddFavourite={handleAddFavourite}
+            key={index}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
