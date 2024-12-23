@@ -11,7 +11,7 @@ function App() {
         "https://plus.unsplash.com/premium_photo-1723809791931-ea96a277bebe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8",
       artist: "Atif Aslam",
       name: "Pagal",
-      added: false,
+      added: true,
     },
     {
       image:
@@ -43,10 +43,25 @@ function App() {
     },
   ];
   const [songData, setSongData] = useState(data);
+  const handleAddFavourite = (index) => {
+    setSongData((prev) => {
+      return prev.map((item, itemindex) => {
+        if (itemindex === index) {
+          return { ...item, added: !item.added };
+        }
+        return item;
+      });
+    });
+  };
   return (
     <div className="grid grid-cols-5">
-      {songData.map((item) => (
-        <SongCard song={item} />
+      {songData.map((item, index) => (
+        <SongCard
+          song={item}
+          index={index}
+          handleAddFavourite={handleAddFavourite}
+          key={index}
+        />
       ))}
     </div>
   );
